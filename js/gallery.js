@@ -81,22 +81,16 @@ const markup = images
         </li>`
   )
   .join("");
+
 list.addEventListener("click", (event) => {
-  if (event.target.closest(".gallery-link")) {
-    event.preventDefault();
-  }
-  const link = event.target.closest(".gallery-link");
-  if (!link) return;
-  const image = link.querySelector("img");
-  const largeImageURL = image.dataset.source;
-  console.log(largeImageURL);
+  const imageElement = event.target.closest(".gallery-image");
+  if (!imageElement) return;
+  
+  event.preventDefault();
+  
+  const largeImageURL = imageElement.dataset.source;
   const modal = basicLightbox.create(
-    `<img
-        src="${largeImageURL}"
-        width="1112"
-        height="640"
-      >
-      </img>`
+    `<img src="${largeImageURL}" width="1112" height="640" alt="${imageElement.alt}">`
   );
   modal.show();
 });
